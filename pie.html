@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="http://d3js.org/d3.v4.js"></script>
+
+<!-- Color scale -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+<!-- Add 2 buttons -->
+<button onclick="update(data1)">2011</button>
+<button onclick="update(data2)">2001</button>
+
+<!-- Create a div where the graph will take place -->
+
+<h3>Level of literacy rate for 2001 and 2011.</h3>
+<div id="my_dataviz"></div>
+<script>
+
+// set the dimensions and margins of the graph
+var width = 450
+    height = 450
+    margin = 40
+
+// The radius of the pieplot is half the width or half the height (smallest one). I substract a bit of margin.
+var radius = Math.min(width, height) / 2 - margin
+
+// append the svg object to the div called 'my_dataviz'
+var svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+// create 2 data_set
+var data1 = {below_primary:23, primary:28, middle:19, secondary:12, intermediate:8, diploma:1, graduate:5}
+var data2 = {below_primary:26, primary:26, middle:16, secondary:14, intermediate:7, diploma:1, graduate:7}
+
+// set the color scale
+var color = d3.scaleOrdinal()
+                  .domain(["below_primary", "primary", "middle", "secondary", "intermediate", "diploma", "graduate"])
+                  .range(["#8c510a", "#d8b365", "#f6e8c3", "#bf812d", "#c7eae5", "#5ab4ac", "#01665e"]);
+
+//var color = d3.scaleOrdinal()
+//  .domain(["a", "b", "c", "d", "e", "f"])
+//  .range(d3.schemePaired);
+
+
+// A function that create / update the plot for a given variable:
+function update(data) {
+
+  // Compute the position of each group on the pie:
+  var pie = d3.pie()
+    .value(function(d) {return d.value; })
+    .sort(function(a, b) { console.log(a) ; return d3.ascending(a.key, b.key);} ) // This make sure that group order remains the same in the pie chart
+  var data_ready = pie(d3.entries(data))
+
+  // map to data
+  var u = svg.selectAll("path")
+    .data(data_ready)
+
+  // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+  u
+    .enter()
+    .append('path')
+    .merge(u)
+    .transition()
+    .duration(1000)
+    .attr('d', d3.arc()
+      .innerRadius(0)
+      .outerRadius(radius)
+    )
+    .attr('fill', function(d){ return(color(d.data.key)) })
+    .attr("stroke", "white")
+    .style("stroke-width", "2px")
+    .style("opacity", 1)
+
+  // remove the group that is not present anymore
+  u
+    .exit()
+    .remove()
+
+}
+
+// Initialize the plot with the first dataset
+update(data1)
+
+
+</script>

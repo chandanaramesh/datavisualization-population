@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="literacyMap.css">
+</head>
+<style>
+svg {
+  font: 10px sans-serif;
+}
+
+.pie{
+  width:600px;
+  height:500px;
+}
+
+.radial{
+  width:600px;
+  height:500px;
+}
+
+.image{
+  text-align:center;
+  display:block;
+}
+
+.y.axis path {
+  display: none;
+}
+
+.y.axis line {
+  stroke: #fff;
+  stroke-opacity: .2;
+  shape-rendering: crispEdges;
+}
+
+.y.axis .zero line {
+  stroke: #000;
+  stroke-opacity: 1;
+}
+
+.title {
+  font: 300 78px Helvetica Neue;
+  fill: #616667;
+}
+
+.birthyear,
+.age {
+  text-anchor: middle;
+}
+
+.birthyear {
+  fill: #99A0A8;
+}
+
+rect {
+  fill-opacity: .6;
+  fill: #67a9cf;
+}
+
+rect:first-child {
+  fill: #fc8d59;
+}
+
+body {
+  font: 10px sans-serif;
+}
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+</style>
+
+<!-- Carousal -->
+<body bgcolor="#ffffff">
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="india.png" alt="First slide" align="center">
+      </div>
+    </div>
+  </div>
+
+  <h1 align="center">DISTRIBUTION OF POPULATION - INDIA</h1>
+  <h2 align="center"> <small class="text-muted">2001 & 2011</small></h2>
+
+
+    <!-- Draw map -->
+    <div id="demobox">
+        <div id="map">
+            <div id="select"></div>
+        </div>
+    </div> <!-- demobox -->
+    
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <div class="page-header">
+      <h1 align="center">POPULATION GROWTH<br>
+        <small align="center">The total population of India in 2011 was 1,210,193,422. India has added 181.5 Billion since 2001</small>
+        <h6 align="center">Press left/right arrow keys to navigate </h6>
+      </h1>
+    </div>
+
+    <script src="districtMap.js"></script>
+    <script src="literacyMap.js"></script>
+    <p> </br></p>
+    <div class="page-header">
+      <h1 align="center">LITERACY RATE<br>
+        <small align="center"> India has managed to achieve an effective literacy rate of 74.04 per cent in 2011. In the 2001 census the country's literacy rate stood at 64.8 percent. The most notable thing that came across in the 2011 census is the sharp rise in the literacy of females over males.</small>
+      </h1>
+    </div>
+    <iframe class="pie" src="pielabel.html" ></iframe>
+    <iframe class="radial" src="radial.html" align="right" ></iframe>
+
+    <!--
+    <script>
+            $(function(){
+                $("#includedContent").load("density.html");
+            });
+    </script>
+
+    <div id="includedContent"></div>
+  -->
+    
+
+</body>
+</html>
